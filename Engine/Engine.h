@@ -19,8 +19,8 @@
 #include "Component/AudioComponet.h"
 
 //Graphics
-#include "Graphics/Renderer.h"
-#include "Graphics/Texture.h"
+#include "Graphics/Material.h"
+#include "Graphics/VertexBuffer.h"
 
 //physics system
 
@@ -31,6 +31,13 @@
 
 //Components
 #include "Component/PhysicsComponent.h"
+#include "Component/CameraComponent.h"
+#include "Component/MeshComponent.h"
+#include "Component/LightComponent.h"
+#include "Component/ModelComponent.h"
+
+#include "Component/FreeCameraController.h"
+//#include "Component/AudioComponent.h"
 
 //Systems
 #include "Input/InputSystem.h"

@@ -1,8 +1,9 @@
 #pragma once
 #include "Framework/System.h"
-#include "Graphics/Texture.h"
 #include "Math/Transform.h"
+
 #include "SDL.h"
+#include <glad/glad.h>
 #include <string>
 
 namespace dwb
@@ -18,10 +19,8 @@ namespace dwb
 		void BeginFrame();
 		void EndFrame();
 
-		friend class Texture;
-
 	private:
-		SDL_Renderer* renderer = nullptr;
+		SDL_GLContext context;
 		SDL_Window* window = nullptr;
 	};
 }

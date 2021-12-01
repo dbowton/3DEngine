@@ -39,6 +39,7 @@ namespace dwb
 		bool IsButtonDown(int id) { return mouseButtonState[id]; }
 		bool IsPreviousButtonDown(int id) { return prevMouseButtonState[id]; }
 		eKeyState GetButtonState(int id);
+		glm::vec2 GetMouseRelative() { return mouseRelative; };
 
 	private:
 		std::vector<Uint8> keyboardState; 
@@ -46,6 +47,10 @@ namespace dwb
 		int numKeys;
 
 		glm::vec2 mousePosition;
+
+		glm::vec2 prevMousePosition;
+		glm::vec2 mouseRelative;
+
 		std::array<Uint8, 3> mouseButtonState;
 		std::array<Uint8, 3> prevMouseButtonState;
 	};

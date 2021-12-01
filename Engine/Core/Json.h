@@ -1,6 +1,8 @@
 #pragma once
-#include "document.h"
+//#include "document.h"
 #include "Math/MathTypes.h"
+
+#include <document.h>
 #include <vector>
 #include <string>
 
