@@ -1,6 +1,7 @@
 #pragma once
 
 #define REGISTER_CLASS(class) dwb::ObjectFactory::Instance().Register<class>(#class)
+#define CREATE_ENGINE_OBJECT(class) dwb::ObjectFactory::Instance().Create<dwb::class>(#class)
 
 //core
 #include "Core/Utilities.h"
