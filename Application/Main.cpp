@@ -7,63 +7,17 @@ int main(int argc, char** argv)
 	engine->StartUp();
 	engine->Get<dwb::Renderer>()->Create("OpenGL", 800, 600);
 
+	dwb::SeedRandom(static_cast<unsigned int>(time(nullptr)));
+	dwb::SetFilePath("../resources");
+	
 	// create scene
 	std::unique_ptr<dwb::Scene> scene = std::make_unique<dwb::Scene>();
 	scene->engine = engine.get();
-
-	dwb::SeedRandom(static_cast<unsigned int>(time(nullptr)));
-	dwb::SetFilePath("../resources");
-
-	// create camera
-	{
-		auto actor = CREATE_ENGINE_OBJECT(Actor);
-		actor->name = "camera";
-		actor->transform.position = glm::vec3{ 0, 0, 5 };
-
-		{
-			auto component = CREATE_ENGINE_OBJECT(CameraComponent);
-			component->SetPerspective(45.0f, 800.0f / 600.0f, 0.01f, 100.0f);
-			actor->AddComponent(std::move(component));
-		}
-		{
-			auto component = CREATE_ENGINE_OBJECT(FreeCameraController);
-			component->speed = 8;
-			component->sensitivity = 0.1f;
-			actor->AddComponent(std::move(component));
-		}
-		
-		scene->addActor(std::move(actor));
-	}
-
-	// create model
-	{
-		auto actor = CREATE_ENGINE_OBJECT(Actor);
-		actor->name = "model";
-		actor->transform.position = glm::vec3{ 0 };
-		actor->transform.scale = glm::vec3{ 1 };
-
-		auto component = CREATE_ENGINE_OBJECT(ModelComponent);
-		component->model = engine->Get<dwb::ResourceSystem>()->Get<dwb::Model>("models/cube.obj");
-		component->material = engine->Get<dwb::ResourceSystem>()->Get<dwb::Material>("materials/wood.mtl", engine.get());
-
-		actor->AddComponent(std::move(component));
-		scene->addActor(std::move(actor));
-	}
-
-	// create light
-	{
-		auto actor = CREATE_ENGINE_OBJECT(Actor);
-		actor->name = "light";
-		actor->transform.position = glm::vec3{ 4 };
-
-		auto component = CREATE_ENGINE_OBJECT(LightComponent);
-		component->ambient = glm::vec3{ 0.2f };
-		component->diffuse = glm::vec3{ 1 };
-		component->specular = glm::vec3{ 1 };
-
-		actor->AddComponent(std::move(component));
-		scene->addActor(std::move(actor));
-	}
+	
+	// load scene
+	rapidjson::Document document;
+	bool success = dwb::json::Load("scenes/main.scn", document);
+	scene->Read(document);
 
 	glm::vec3 translate{ 0 };
 	float angle = 0;
