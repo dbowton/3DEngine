@@ -15,8 +15,8 @@
       "components": [
         {
           "type": "ModelComponent",
-          "model_name": "models/cube.obj",
-          "material_name": "materials/wood.mtl"
+          "model_name": "models/ogre.obj",
+          "material_name": "materials/ogre.mtl"
         }
       ]
     },
@@ -55,7 +55,7 @@
       "transform": {
         "position": [
           0,
-          0,
+          2,
           4
         ]
       },
@@ -63,9 +63,9 @@
         {
           "type": "LightComponent",
           "ambient": [
-            0.1,
-            0.1,
-            0.1
+            0.5,
+            0.5,
+            0.5
           ],
           "diffuse": [
             1,
